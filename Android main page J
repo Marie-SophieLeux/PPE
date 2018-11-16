@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Road2" x:Class="Road2.MainPage">
+    
+<FlexLayout Direction="Row"
+            AlignItems="Start">
+       <Grid>       
+         <Label Text="Road2"
+               Grid.Row="0" Grid.Column="0"
+               Grid.ColumnSpan="7" 
+               Grid.RowSpan="1"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               TextColor="Black"
+               BackgroundColor="Green"
+               FontSize="Large"/>   
+           
+            
+        <Switch x:Name = "Salle" OnColor="Red" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>   
+        <Label Text="Salle" Grid.Row="2" Grid.Column="3" FontSize="Small"/>
+        
+        <Switch x:Name = "POI" OnColor="Red" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Label Text="Point d'intérêt" Grid.Row="3" Grid.Column="3" FontSize="Small" Grid.ColumnSpan="3" />    
+
+        <Switch x:Name = "Prof" OnColor="Red" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Label Text="Professeur" Grid.Row="4" Grid.Column="3" FontSize="Small" Grid.ColumnSpan="3" />
+            
+        <Switch x:Name = "Asso" OnColor="Red" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Label Text="."  Grid.Row="0" Grid.Column="0" TextColor="Green"/> 
+        <Label Text="Association" Grid.Row="5" Grid.Column="3" FontSize="Small" Grid.ColumnSpan="3" />    
+
+        
+        <Entry Placeholder="Rechercher" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="3" />
+        </Grid>
+        
+    </FlexLayout>
+</ContentPage>
