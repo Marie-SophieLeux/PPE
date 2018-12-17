@@ -51,29 +51,53 @@ namespace modele
             // acquisition des différents itinéraires de noeuds possibles
             while (check == false)
             {
-                n = listeList.Count;
-                // liste de transition
+                // // liste de transition
                 List<ListNoeud> listeTran = new List<ListNoeud>();
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < listeList.Count; i++)
                 {
                     // liste qui contient les caseNoeuds de 1 itinéraire
                     ListNoeud liste = listeList[i];
-                    //ListNoeud l = new ListNoeud();
-                    // t: index du dernier élément de la liste en cours
-                    int t = liste.getListe().Count;
-                    CaseNoeud c = liste.getListe()[t - 1];
-                    if ((compareCase(c, listCaseNoeudAr[0]) == false) && (compareCase(c, listCaseNoeudAr[1]) == false))
+                    // vérifie si la liste est terminé
+                    if (liste.getStatus() == false)
                     {
-                        // obtenir la liste des voisins du dernier élément de la liste puis les comparer aux éléments présents de la liste
-                    }
-                    else
-                    {
+                        // t: index du dernier élément de la liste en cours
+                        int t = liste.getListe().Count;
+                        CaseNoeud c = liste.getListe()[t - 1];
+                        // prends en liste les voisins du dernier point
+                        List<CaseNoeud> voisins = c.getVoisin();
+                        // boucle qui va considérer chaque voisin et va les ajouter à la liste s'il correspond aux critères
+                        // critère: différents des case départs et des caseNoeuds déjà contenus dans la liste
+                        for (int j = 0; j < voisins.Count; j++)
+                        {
+                            // case qui est voisin
+                            CaseNoeud v = voisins[j];
+                            //
+                            if ((liste.Contains(v) == true)&&(listCaseNoeudDep.Contains(v) == true))
+                            {
+
+                            }
+
+                            // si la dernière caseNoeud est l'arrivée
+                            if (listCaseNoeudAr.Contains(v))
+                            {
+                                
+                            }
+                        }
+                    } else {
                         listeTran.Add(liste);
                     }
+                    
                 }
-
                 listeList = listeTran;
-                // fonction qui retourne boolean après vérification
+                check = true;
+                // si 1 seul élément n'est pas fini alors la boucle continue
+                for (int l = 0; l < listeList.Count; l++)
+                {
+                    if (listeList[l].getStatus() == false)
+                    {
+                        check = false;
+                    }
+                }
             }
             // méthode qui verifie si tous les ititnéraires possibles arrivent à destination
             return listeList;
@@ -104,19 +128,31 @@ namespace modele
     public class ListNoeud
     {
         // liste de noeud d'un possilbe itinéraire
-        private List<CaseNoeud> list;
-
+        private List<CaseNoeud> liste;
+        private Boolean statusFinis;
         //constructeur
         public ListNoeud()
         {
             list = new List<CaseNoeud>();
+            statusFinis = false;
         }
 
         // méthode qui retourne la liste de noeud
         public List<CaseNoeud> getListe()
         {
-            return list;
+            return liste;
         }
+
+        public Boolean getStatus()
+        {
+            return statusFinis;
+        }
+
+        public void setStatus(Boolean status)
+        {
+            statusFinis = status;
+        }
+
     }
 
     // --------------------------------------------------------
