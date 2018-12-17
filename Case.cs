@@ -60,7 +60,7 @@ namespace modele
             this.noeud = var3;
         }
 
-        public Boolean getEscalier
+        public Boolean getEscalier()
         {
             return this.escalier;
         }
@@ -69,7 +69,7 @@ namespace modele
             this.escalier = var4;
         }
 
-        public Boolean getPtcle
+        public Boolean getPtcle()
         {
             return this.pt_cle;
         }
