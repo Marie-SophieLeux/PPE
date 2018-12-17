@@ -42,7 +42,7 @@ namespace modele
             this.col = var1;
         }
      
-        public Boolean getCouloir
+        public Boolean getCouloir()
         {
             return this.couloir;
         }
@@ -51,7 +51,7 @@ namespace modele
             this.couloir = var2;
         }
 
-        public Boolean getNoeud
+        public Boolean getNoeud()
         {
             return this.noeud;
         }
@@ -94,7 +94,7 @@ namespace modele
 
     public class CaseEscalier : Case
     { 
-       public CaseEscalier():Base()
+       public CaseEscalier():base()
        {
        }
 
