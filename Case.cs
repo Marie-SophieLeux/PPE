@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
  
 namespace modele
@@ -10,14 +13,14 @@ namespace modele
         protected int lig;
 
         protected int col;
-        public Boolean couloir, porte, escalier, noeud;
+        public Boolean couloir, pt_cle, escalier, noeud;
 // suppression mur vierge et salle
         public Case()
         {
             lig = null;
             col = null;
             couloir = false;
-            porte = false;
+            pt_cle = false;
             escalier = false;
             noeud = false;
         }
@@ -38,110 +41,85 @@ namespace modele
         {
             this.col = var1;
         }
+     
+        public Boolean getCouloir
+        {
+            return this.couloir;
+        }
+        public void setCouloir(Boolean var2)
+        {
+            this.couloir = var2;
+        }
+
+        public Boolean getNoeud
+        {
+            return this.noeud;
+        }
+        public void setNoeud(Boolean var3)
+        {
+            this.noeud = var3;
+        }
+
+        public Boolean getEscalier
+        {
+            return this.escalier;
+        }
+        public void setEscalier(Boolean var4)
+        {
+            this.escalier = var4;
+        }
+
+        public Boolean getPtcle
+        {
+            return this.pt_cle;
+        }
+        public void setPtcle(Boolean var5)
+        {
+            this.pt_cle = var5;
+        }
+
 
 
     }
 
     public class CaseCouloir : Case
     {
-        private Boolean itineraire;
 
 
-        public CaseCouloir()
+        public CaseCouloir():base()
         {
-            itineraire = false;
         }
-        public Boolean getItin()
-        {
-            return this.itineraire;
-        }
-        public void setItin(Boolean var2)
-        {
-            this.itineraire = var2;
-        }
+       
     }
 
     public class CaseEscalier : Case
-    {
+    { 
+       public CaseEscalier():Base()
+       {
+       }
 
     }
-    public class CaseMur : Case
+    
+  public class Pt_cle : Case
     {
-    }
-    public class CaseVierge : Case
-    {
-    }
-    public class CaseSalle : Case
-    {
-        private string salle1;
-
-        public CaseSalle()
+        
+       public Pt_cle():base()
         {
-            salle1 = "NULL";
+            
         }
-        public string getSalle1()
-        {
-            return this.salle1;
-        }
-        public void setSalle1(string var3)
-        {
-            this.salle1 = var3;
-        }
-    }
-    public class CasePorte : Case
-    {
-        private Boolean depart;
-
-        private Boolean arrivee;
-
-        private string salle2;
-
-        public CaseCouloir entreeCouloir;
-
-        public CasePorte()
-        {
-            depart = false;
-            arrivee = false;
-            salle2 = "NULL";
-            entreeCouloir = new CaseCouloir();
-        }
-        public Boolean getDepart()
-        {
-            return this.depart;
-        }
-        public void setDepart(Boolean var4)
-        {
-            this.depart = var4;
-        }
-
-        public Boolean getArrivee()
-        {
-            return this.arrivee;
-        }
-        public void setArrivee(Boolean var4)
-        {
-            this.arrivee = var4;
-        }
-
-        public string getSalle2()
-        {
-            return this.salle2;
-        }
-        public void setSalle2(string var4)
-        {
-            this.salle2 = var4;
-        }
-
-
+        
     }
 
-    public class CaseNoeud : Case
+    public class Noeud : Case
     {
-        List<CaseNoeud> listVoisin = new List<CaseNoeud>();
-        //voisin(liste noeud)
-        public List<CaseNoeud> getVoisin()
+        public Noeud() : base()
         {
-            return listVoisin;
+
         }
+
     }
+    
+      
+
+      
 }
