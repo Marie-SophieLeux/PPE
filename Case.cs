@@ -11,7 +11,6 @@ namespace modele
     {
         //coordonnées 
         protected int lig;
-
         protected int col;
         public Boolean couloir, pt_cle, escalier, noeud;
 
