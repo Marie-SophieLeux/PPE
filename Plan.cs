@@ -108,20 +108,43 @@ namespace modele
             return listeList;
         }
 
-        public Itineraire generationIti(ListNoeud list, Pt_cle dep, Pt_cle arr)
+        // la méthode génère une liste de CaseCouloir avec l'aide de la liste des CaseNoeud
+        public Itineraire generationIti(ListNoeud listN, Pt_cle dep, Pt_cle arr)
         {
+            int lig, col;
             Itineraire iti = new Itineraire();
-            iti.Add(dep.getCouloir);
-            
+            List<CaseCouloir> liste = new List<CaseCouloir>();
+            // liste contenant la case départ jusqu'au premier noeud
+            liste = generationList(dep.getCouloir(),listN[0]);
+            for (int i = 0; i < liste.Count; i++)
+            {
+                iti.addCase(liste[i]);
+            }
+            // boucle pour rajouter toutes les CaseCouloir qui sont entre les CaseNoeud
+            for (int j = 1; j < listN; j++)
+            {
+                liste = generationList(listN[j-1],listN[j]);
+                for (int k = 0; k < liste.Count; k++)
+                {
+                    iti.addCase(liste[k]);
+                }
+            }
+            liste = generationList(listN[listN.Count - 1], arr.getCouloir());
+            for (int l = 0; l < liste.Count; l++)
+            {
+                iti.addCase(liste[l]);
+            }
+            return iti;
+
         }
 
+        // retourne le plus court itinéraire
         public Itineraire itiFinal(List<Itineraire> liste)
         {
             int taille = liste.Count;
             int n = 0;
             if (taille > 1)
             {
-                
                 for (int i = 1; i < liste.Count; i++)
                 {
                     if (liste[i].getDistance < liste[i - 1].getDistance)
@@ -131,10 +154,9 @@ namespace modele
                 }
                 List<CaseCouloir> iti = new List<CaseCouloir>();
             }
-
             return liste[n];
         }
-
+        // compare 2 objets case pour vérifier si elles sont identiques
         public Boolean compareCase(Case c1, Case c2)
         {
             if ((c1.getCol() == c2.getCol()) && (c1.getLig() == c2.getLig()))
@@ -143,7 +165,59 @@ namespace modele
             }
             return false;
         }
-
+        // méthode qui retourne liste de case sauf le dernier élément 
+        public List<CaseCouloir> generationList(CaseCouloir d, CaseCouloir a)
+        {
+            List<CaseCouloir> list = new List<CaseCouloir>();
+            int n, index;
+            if(d.getCol() == a.getCol())
+            {
+                int col;
+                n = a.getLig() - d.getLig();
+                col = d.getCol();
+                if (n > 0)
+                {
+                    for (int lig = d.getLig(); lig < a.getLig(); lig++)
+                    {
+                        index = lig * nbCol + col;
+                        list.Add(grille[index]);
+                    }
+                }
+                else
+                {
+                    for (int lig = d.getLig(); a.getLig() < lig; lig--)
+                    {
+                        index = lig * nbCol + col;
+                        list.Add(grille[index]);
+                    }
+                }
+                
+            }
+            else
+            {
+                int lig;
+                n = a.getCol() - d.getCol();
+                lig = d.getLig();
+                if (n > 0)
+                {
+                    for (int col = d.getCol(); col < a.getLig(); col++)
+                    {
+                        index = lig * nbCol + col;
+                        list.Add(grille[index]);
+                    }
+                }
+                else
+                {
+                    for (int col = d.getCol(); a.getCol() < col; col--)
+                    {
+                        index = lig * nbCol + col;
+                        list.Add(grille[index]);
+                    }
+                }
+            }
+            return list;
+        }
+    
     }
 
 // --------------------------------------------------------
@@ -188,7 +262,8 @@ namespace modele
         }
 
     }
-
+// --------------------------------------------------------
+    // classe itinéraire pour mettre la liste des cases et distance à parcourir
     public class Itineraire
     {
         List<CaseCouloir> iti;
@@ -199,9 +274,11 @@ namespace modele
             distance = 0;
         }
 
+        // ajoute une case dans la liste et incrémente de 1 la distance 
         public void addCase(CaseCouloir caseC)
         {
             iti.Add(caseC);
+            distance++;
         }
         public List<CaseCouloir> getIti()
         {
@@ -213,10 +290,6 @@ namespace modele
             return distance;
         }
 
-        public void setDistance(int dist)
-        {
-            distance = dist;
-        }
     }
 }
 
