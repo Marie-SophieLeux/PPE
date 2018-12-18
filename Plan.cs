@@ -108,12 +108,31 @@ namespace modele
             return listeList;
         }
 
-
-
-        public List<CaseCouloir> itiFinal()
+        public Itineraire generationIti(ListNoeud list, Pt_cle dep, Pt_cle arr)
         {
-            List<CaseCouloir> iti = new List<CaseCouloir>();
-            return iti;
+            Itineraire iti = new Itineraire();
+            iti.Add(dep.getCouloir);
+            
+        }
+
+        public Itineraire itiFinal(List<Itineraire> liste)
+        {
+            int taille = liste.Count;
+            int n = 0;
+            if (taille > 1)
+            {
+                
+                for (int i = 1; i < liste.Count; i++)
+                {
+                    if (liste[i].getDistance < liste[i - 1].getDistance)
+                    {
+                        n = i;
+                    }
+                }
+                List<CaseCouloir> iti = new List<CaseCouloir>();
+            }
+
+            return liste[n];
         }
 
         public Boolean compareCase(Case c1, Case c2)
@@ -127,7 +146,7 @@ namespace modele
 
     }
 
-
+// --------------------------------------------------------
     // la classe liste de noeud a été créée pour créer une liste de liste 
     public class ListNoeud
     {
@@ -170,8 +189,35 @@ namespace modele
 
     }
 
-    // --------------------------------------------------------
-    
+    public class Itineraire
+    {
+        List<CaseCouloir> iti;
+        int distance;
+        public Itineraire()
+        {
+            iti = new List<CaseCouloir>();
+            distance = 0;
+        }
+
+        public void addCase(CaseCouloir caseC)
+        {
+            iti.Add(caseC);
+        }
+        public List<CaseCouloir> getIti()
+        {
+            return iti;
+        }
+
+        public int getDistance()
+        {
+            return distance;
+        }
+
+        public void setDistance(int dist)
+        {
+            distance = dist;
+        }
+    }
 }
 
 
