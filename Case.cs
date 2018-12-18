@@ -14,7 +14,7 @@ namespace modele
 
         protected int col;
         public Boolean couloir, pt_cle, escalier, noeud;
-// suppression mur vierge et salle
+
         public Case()
         {
             lig = null;
@@ -102,20 +102,37 @@ namespace modele
     
   public class Pt_cle : Case
     {
-        
-       public Pt_cle():base()
+        CaseCouloir ptCouloir = new CaseCouloir();
+       public Pt_cle() : base()
         {
             
         }
-        
+
+        public CaseCouloir getCouloir()
+        {
+            return ptCouloir;
+        }
     }
 
-    public class Noeud : Case
-    {
-        public Noeud() : base()
+    public class CaseNoeud : Case
+    {   
+        // liste des CaseNoeuds voisins
+        List<CaseNoeud> voisins = new List<CaseNoeud>();
+        public CaseNoeud() : base()
         {
 
         }
+
+        public List<CaseNoeud> getVoisin()
+        {
+            return voisins;
+        }
+
+        public void setVoisin(List<CaseNoeud> voisins)
+        {
+            this.voisins = voisins;
+        }
+
 
     }
     
