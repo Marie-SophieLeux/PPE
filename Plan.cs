@@ -68,26 +68,31 @@ namespace modele
                         // boucle qui va considérer chaque voisin et va les ajouter à la liste s'il correspond aux critères
                         // critère: différents des case départs et des caseNoeuds déjà contenus dans la liste
                         for (int j = 0; j < voisins.Count; j++)
-                        {
+                        {   
+                            // dupplication de la liste en cours pour pouvoir ajouter les nouveaux itinéraires possibles
+                            ListeNoeud temp = liste;
                             // case qui est voisin
                             CaseNoeud v = voisins[j];
-                            //
-                            if ((liste.Contains(v) == true)&&(listCaseNoeudDep.Contains(v) == true))
+                            // si la CaseNoeud n'est pas dans la liste et parmi les CaseNoeud de départ
+                            if ((temp.Contains(v) == false)&&(listCaseNoeudDep.Contains(v) == false))
                             {
-
-                            }
-
-                            // si la dernière caseNoeud est l'arrivée
-                            if (listCaseNoeudAr.Contains(v))
-                            {
-                                
+                                // ajout de l'élément dans la liste
+                                temp.addNoeud(v);
+                                // si la dernière caseNoeud est l'arrivée alors 
+                                if (listCaseNoeudAr.Contains(v) == true)
+                                {
+                                    temp.setStatut(true);
+                                }
+                                // ajout de la nouvelle liste créée
+                                listeTran.Add(temp);
                             }
                         }
                     } else {
+                        // ajout de la liste terminé
                         listeTran.Add(liste);
                     }
-                    
                 }
+                // la liste des listes est mise à jour
                 listeList = listeTran;
                 check = true;
                 // si 1 seul élément n'est pas fini alors la boucle continue
@@ -108,7 +113,6 @@ namespace modele
         public List<CaseCouloir> itiFinal()
         {
             List<CaseCouloir> iti = new List<CaseCouloir>();
-
             return iti;
         }
 
@@ -129,12 +133,19 @@ namespace modele
     {
         // liste de noeud d'un possilbe itinéraire
         private List<CaseNoeud> liste;
-        private Boolean statusFinis;
+        // statut qui indique si la liste est complète
+        private Boolean statutFinis;
         //constructeur
         public ListNoeud()
         {
             list = new List<CaseNoeud>();
             statusFinis = false;
+        }
+
+        // méthode pour ajouter un élément dans la liste
+        public void addNoeud(CaseNoeud noeud)
+        {
+            liste.Add(noeud);
         }
 
         // méthode qui retourne la liste de noeud
@@ -148,9 +159,13 @@ namespace modele
             return statusFinis;
         }
 
-        public void setStatus(Boolean status)
+        public void setListe(List<CaseNoeud> list)
         {
-            statusFinis = status;
+            liste = list;
+        }
+        public void setStatut(Boolean statut)
+        {
+            statutFinis = statut;
         }
 
     }
