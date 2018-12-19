@@ -12,12 +12,22 @@ namespace modele
         //coordonnées 
         protected int lig;
         protected int col;
-        public Boolean couloir, pt_cle, escalier, noeud;
+        protected Boolean couloir, pt_cle, escalier, noeud;
 
         public Case()
         {
             lig = null;
             col = null;
+            couloir = false;
+            pt_cle = false;
+            escalier = false;
+            noeud = false;
+        }
+
+        public Case(int lig, int col)
+        {
+            this.lig = lig;
+            this.col = col;
             couloir = false;
             pt_cle = false;
             escalier = false;
@@ -54,6 +64,7 @@ namespace modele
         {
             return this.noeud;
         }
+        
         public void setNoeud(Boolean var3)
         {
             this.noeud = var3;
@@ -76,19 +87,21 @@ namespace modele
         {
             this.pt_cle = var5;
         }
-
-
-
     }
 
     public class CaseCouloir : Case
     {
+        List<CaseNoeud> noeudVoisin = new List<CaseNoeud>();
 
-
-        public CaseCouloir():base()
+        public CaseCouloir(int lig, int col):base(lig,col)
         {
+            this.setCouloir(true);
         }
-       
+        public List<CaseNoeud> getNoeudsVoisin()
+        {
+            return noeudVoisin;
+        }
+
     }
 
     public class CaseEscalier : Case
@@ -102,7 +115,7 @@ namespace modele
   public class Pt_cle : Case
     {
         CaseCouloir ptCouloir = new CaseCouloir();
-       public Pt_cle() : base()
+        public Pt_cle() : base()
         {
             
         }
