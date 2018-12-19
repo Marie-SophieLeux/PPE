@@ -1,0 +1,202 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    public class Case
+    {
+        //coordonnées 
+        protected int lig;
+
+        protected int col;
+        public Boolean couloir, escalier, pt_cle, noeud;
+
+        public Case()
+        {
+            lig = 0;
+            col = 0;
+            couloir = false;
+            pt_cle = false;
+
+            escalier = false;
+
+            noeud = false;
+        }
+
+        public int getLig()
+        {
+            return this.lig;
+        }
+        public void setLig(int var)
+        {
+            this.lig = var;
+        }
+        public int getLCol()
+        {
+            return this.col;
+        }
+        public void setCol(int var1)
+        {
+            this.col = var1;
+        }
+        public Boolean getCouloir
+        {
+            return this.couloir;
+        }
+        public void setCouloir(Boolean var2)
+        {
+            this.couloir = var2;
+        }
+
+        public Boolean getNoeud()
+        {
+            return this.noeud;
+        }
+        public void setNoeud(Boolean var3)
+        {
+            this.noeud = var3;
+        }
+
+        public Boolean getEscalier
+        {
+            return this.escalier;
+        }
+        public void setEscalier(Boolean var4)
+        {
+            this.escalier = var4;
+        }
+
+        public Boolean getPtcle
+        {
+            return this.pt_cle;
+        }
+        public void setPtcle(Boolean var5)
+        {
+            this.pt_cle = var5;
+        }
+
+       public static void Main()
+        {
+            int i = 0;
+           
+            int nblig = 20;
+            int nbcol=20;
+            int ligne;
+            int colonne;
+            int[] myArray=new int[20] ;
+            
+           
+            i=0;
+            colonne = i % nbcol;
+            ligne = i / nbcol;
+            int lig0 =ligne;
+         
+            int col0=colonne;
+            i=1;
+            int lig1=ligne;
+            int col1=colonne;
+            if(((lig1>lig0)&&(col1==col0))||((lig1<lig0)&&(col1==col0))||((lig1==lig0)&&(col1<col0))||((lig1==lig0)&&(col1>col0)))
+            {
+                  Console.WriteLine("aller tout droit");
+             
+            }
+            for(i=2;i<20;i++)
+            { int lignea = ligne;
+                int colonnea = colonne;
+                colonne = i % nbcol;
+                ligne = i / nbcol;
+                int ligneb = ligne;
+                int colonneb = colonne;
+                int colonnec = (i + 1) % nbcol;
+                int lignec = (i + 1) / nbcol;
+                if((lignec == ligneb) && (colonnec < colonneb))
+                {
+                    if ((lignec == lignea + 1) && (colonnec == colonnea + 1))
+                    { Console.WriteLine("avance à gauche"); }
+                    if ((lignec == lignea + 1) && (colonnec == colonnea - 1))
+                    { Console.WriteLine("avance à droite"); }
+                    if ((lignec == lignea - 1) && (colonnec == colonnea - 1))
+                    { Console.WriteLine("reculer à droite"); }
+                    if ((lignec == lignea - 1) && (colonnec == colonnea + 1))
+                    { Console.WriteLine("reculer à gauche"); }
+                }
+                if ((lignec==ligneb)&&(colonnec>colonneb))
+                {
+                    if ((lignec == lignea + 1) && (colonnec == colonnea + 1))
+                    { Console.WriteLine("avance à gauche"); }
+                    if ((lignec == lignea + 1) && (colonnec == colonnea - 1))
+                    { Console.WriteLine("avance à droite"); }
+                    if ((lignec == lignea - 1) && (colonnec == colonnea - 1))
+                    { Console.WriteLine("reculer à droite"); }
+                    if ((lignec == lignea - 1) && (colonnec == colonnea + 1))
+                    { Console.WriteLine("reculer à gauche"); }
+                }
+                if((lignec>ligneb)&&(colonnec==colonneb))
+                {
+                    if ((lignec==lignea+1)&&(colonnec==colonnea+1))
+                    { Console.WriteLine("avance à gauche"); }
+                    if ((lignec == lignea + 1) && (colonnec == colonnea - 1))
+                    { Console.WriteLine("avance à droite"); }
+                    if ((lignec == lignea - 1) && (colonnec == colonnea - 1))
+                    { Console.WriteLine("reculer à droite"); }
+                    if ((lignec == lignea - 1) && (colonnec == colonnea + 1))
+                    { Console.WriteLine("reculer à gauche"); }
+
+                }
+                if ((lignec < ligneb) && (colonnec == colonneb))
+                {
+                    if ((lignec == lignea + 1) && (colonnec == colonnea + 1))
+                    { Console.WriteLine("avance à gauche"); }
+                    if ((lignec == lignea + 1) && (colonnec == colonnea - 1))
+                    { Console.WriteLine("avance à droite"); }
+                    if ((lignec == lignea - 1) && (colonnec == colonnea - 1))
+                    { Console.WriteLine("reculer à droite"); }
+                    if ((lignec == lignea - 1) && (colonnec == colonnea + 1))
+                    { Console.WriteLine("reculer à gauche"); }
+
+                }
+
+                myArray[i] = myArray[i + 1];
+            
+            }
+
+
+        }
+
+    }
+
+    public class Pt_cle : Case
+    {
+        
+       public Pt_cle():base()
+        {
+            
+        }
+        
+    }
+
+    public class Noeud : Case
+    {
+        public Noeud() : base()
+        {
+
+        }
+
+    }
+    public class Couloir : Case
+    {
+        public Couloir() : base()
+        {
+
+        }
+    }
+    public class Escalier : Case
+    {
+        public Escalier() : base()
+        {
+
+        }
+    }
