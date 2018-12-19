@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using modele;
 
 namespace modele
 {
@@ -95,7 +96,7 @@ namespace modele
                         int t = liste.getListe().Count;
                         CaseNoeud c = liste.getListe()[t - 1];
                         // prends en liste les voisins du dernier point
-                        List<CaseNoeud> voisins = c.getVoisin();
+                        List<CaseNoeud> voisins = c.getNoeudsVoisin();
                         // boucle qui va considérer chaque voisin et va les ajouter à la liste s'il correspond aux critères
                         // critère: différents des case départs et des caseNoeuds déjà contenus dans la liste
                         for (int j = 0; j < voisins.Count; j++)
@@ -216,6 +217,7 @@ namespace modele
         }
         // méthode qui retourne liste de case sauf le dernier élément 
         public List<CaseCouloir> generationList(CaseCouloir d, CaseCouloir a)
+
         {
             List<CaseCouloir> list = new List<CaseCouloir>();
             int n, index;
