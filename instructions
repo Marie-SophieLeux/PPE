@@ -42,7 +42,7 @@ namespace ConsoleApp1
         {
             this.col = var1;
         }
-        public Boolean getCouloir
+        public Boolean getCouloir()
         {
             return this.couloir;
         }
@@ -60,7 +60,7 @@ namespace ConsoleApp1
             this.noeud = var3;
         }
 
-        public Boolean getEscalier
+        public Boolean getEscalier()
         {
             return this.escalier;
         }
@@ -69,7 +69,7 @@ namespace ConsoleApp1
             this.escalier = var4;
         }
 
-        public Boolean getPtcle
+        public Boolean getPtcle()
         {
             return this.pt_cle;
         }
@@ -78,33 +78,34 @@ namespace ConsoleApp1
             this.pt_cle = var5;
         }
 
-       public static void Main()
+        private static void Main()
         {
             int i = 0;
-           
+
             int nblig = 20;
-            int nbcol=20;
+            int nbcol = 20;
             int ligne;
             int colonne;
-            int[] myArray=new int[20] ;
-            
-           
-            i=0;
+            int[] myArray = new int[20];
+
+
+            i = 0;
             colonne = i % nbcol;
             ligne = i / nbcol;
-            int lig0 =ligne;
-         
-            int col0=colonne;
-            i=1;
-            int lig1=ligne;
-            int col1=colonne;
-            if(((lig1>lig0)&&(col1==col0))||((lig1<lig0)&&(col1==col0))||((lig1==lig0)&&(col1<col0))||((lig1==lig0)&&(col1>col0)))
+            int lig0 = ligne;
+
+            int col0 = colonne;
+            i = 1;
+            int lig1 = ligne;
+            int col1 = colonne;
+            if (((lig1 > lig0) && (col1 == col0)) || ((lig1 < lig0) && (col1 == col0)) || ((lig1 == lig0) && (col1 < col0)) || ((lig1 == lig0) && (col1 > col0)))
             {
-                  Console.WriteLine("aller tout droit");
-             
+                Console.WriteLine("aller tout droit");
+
             }
-            for(i=2;i<20;i++)
-            { int lignea = ligne;
+            for (i = 2; i < 20; i++)
+            {
+                int lignea = ligne;
                 int colonnea = colonne;
                 colonne = i % nbcol;
                 ligne = i / nbcol;
@@ -112,7 +113,7 @@ namespace ConsoleApp1
                 int colonneb = colonne;
                 int colonnec = (i + 1) % nbcol;
                 int lignec = (i + 1) / nbcol;
-                if((lignec == ligneb) && (colonnec < colonneb))
+                if ((lignec == ligneb) && (colonnec < colonneb))
                 {
                     if ((lignec == lignea + 1) && (colonnec == colonnea + 1))
                     { Console.WriteLine("avance à gauche"); }
@@ -123,7 +124,7 @@ namespace ConsoleApp1
                     if ((lignec == lignea - 1) && (colonnec == colonnea + 1))
                     { Console.WriteLine("reculer à gauche"); }
                 }
-                if ((lignec==ligneb)&&(colonnec>colonneb))
+                if ((lignec == ligneb) && (colonnec > colonneb))
                 {
                     if ((lignec == lignea + 1) && (colonnec == colonnea + 1))
                     { Console.WriteLine("avance à gauche"); }
@@ -134,9 +135,9 @@ namespace ConsoleApp1
                     if ((lignec == lignea - 1) && (colonnec == colonnea + 1))
                     { Console.WriteLine("reculer à gauche"); }
                 }
-                if((lignec>ligneb)&&(colonnec==colonneb))
+                if ((lignec > ligneb) && (colonnec == colonneb))
                 {
-                    if ((lignec==lignea+1)&&(colonnec==colonnea+1))
+                    if ((lignec == lignea + 1) && (colonnec == colonnea + 1))
                     { Console.WriteLine("avance à gauche"); }
                     if ((lignec == lignea + 1) && (colonnec == colonnea - 1))
                     { Console.WriteLine("avance à droite"); }
@@ -160,7 +161,7 @@ namespace ConsoleApp1
                 }
 
                 myArray[i] = myArray[i + 1];
-            
+
             }
 
 
@@ -170,12 +171,12 @@ namespace ConsoleApp1
 
     public class Pt_cle : Case
     {
-        
-       public Pt_cle():base()
+
+        public Pt_cle() : base()
         {
-            
+
         }
-        
+
     }
 
     public class Noeud : Case
@@ -200,3 +201,4 @@ namespace ConsoleApp1
 
         }
     }
+}
