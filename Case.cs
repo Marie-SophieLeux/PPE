@@ -103,7 +103,9 @@ namespace modele
         }
 
     }
-
+    ///<summary>
+    /// case différente de caseNoeud mais connecté à une caseNoeud
+    ///</summary>
     public class CaseEscalier : Case
     { 
        public CaseEscalier():base()
@@ -112,7 +114,7 @@ namespace modele
 
     }
     
-  public class Pt_cle : Case
+    public class Pt_cle : Case
     {
         CaseCouloir ptCouloir = new CaseCouloir();
         public Pt_cle() : base()
@@ -126,26 +128,13 @@ namespace modele
         }
     }
 
-    public class CaseNoeud : Case
+    public class CaseNoeud : CaseCouloir
     {   
         // liste des CaseNoeuds voisins
-        List<CaseNoeud> voisins = new List<CaseNoeud>();
         public CaseNoeud() : base()
         {
 
         }
-
-        public List<CaseNoeud> getVoisin()
-        {
-            return voisins;
-        }
-
-        public void setVoisin(List<CaseNoeud> voisins)
-        {
-            this.voisins = voisins;
-        }
-
-
     }
     
       
