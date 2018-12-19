@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace modele
 {
@@ -25,12 +27,41 @@ namespace modele
             this.grille = grille; 
         }
 
-        public List<ListNoeud> rechercheItiNoeud(CaseNoeud depart, CaseNoeud arrivee)
+        public Itineraire chemin(Pt_cle dep, Pt_cle arr)
+        {
+            List<Itineraire> listIti;
+            // lorsque que les 2 points sont dans le même couloir 
+            if (compareList(dep.getCouloir().getNoeudsVoisin(),arr.getCouloir().getNoeudsVoisin()) == false)
+            {
+                List<ListNoeud> listList;
+                listList = rechercheItiNoeud(dep, arr);
+                for (int i = 0; i < listList.Count; i++)
+                {
+                    listIti.Add(generationIti(listList[i], dep, arr));
+                }
+            }
+            else
+            {
+                Itineraire iti = new Itineraire();
+                List<CaseCouloir> listCase = generationList(dep.getCouloir(),arr.getCouloir());
+                listCase.Add(arr.getCouloir());
+                for (int j = 0; j < listCase.Count; j++)
+                {
+                    iti.addCase(listCase[j]);
+                }
+                listIti.Add(iti);
+            }
+            iti = itiFinal(listIti);
+            return iti;
+        }
+
+        // méthode qui va chercher tout les itinéraires possibles pour les noeuds 
+        public List<ListNoeud> rechercheItiNoeud(Pt_cle depart, Pt_cle arrivee)
         {
             // contient liste de tous les itinéraires possibles
             List<ListNoeud> listeList = new List<ListNoeud>();
-            List<CaseNoeud> listCaseNoeudDep = depart.getVoisin();
-            List<CaseNoeud> listCaseNoeudAr = arrivee.getVoisin();
+            List<CaseNoeud> listCaseNoeudDep = depart.getNoeudsVoisin();
+            List<CaseNoeud> listCaseNoeudAr = arrivee.getNoeudsVoisin();
  
             // taille de la liste de noeud de la case départ, on suppose que dans tous les cas la valeur est toujours de 2, chaque couloir 2 noeuds
             int n = listCaseNoeudDep.Count;
@@ -129,11 +160,15 @@ namespace modele
                     iti.addCase(liste[k]);
                 }
             }
+            // ajout des CaseCouloir entre le dernier noeud et le point d'arrivée
             liste = generationList(listN[listN.Count - 1], arr.getCouloir());
             for (int l = 0; l < liste.Count; l++)
             {
                 iti.addCase(liste[l]);
             }
+            // ajout du point d'arrivée
+            iti.addCase(arr.getCouloir());
+
             return iti;
 
         }
@@ -164,6 +199,20 @@ namespace modele
                 return true;
             }
             return false;
+        }
+        // méthode qui compare 2 list pour voir si elles sont contiennent les mêmes éléments
+        public Boolean compareList(List<CaseNoeud> c1, List<CaseNoeud> c2)
+        {
+            Boolean equal = false;
+            if (c1.Count == c2.Count)
+            {
+                IEnumerable<CaseNoeud> list = c2.Where(x => c1.Contains(x));
+                if (list.Count == c2.Count)
+                {
+                    equal = true;
+                }
+            }
+            return equal;
         }
         // méthode qui retourne liste de case sauf le dernier élément 
         public List<CaseCouloir> generationList(CaseCouloir d, CaseCouloir a)
